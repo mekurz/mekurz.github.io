@@ -1,0 +1,37 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">&times;</button>
+  <h4 class="modal-title">Inventory</h4>
+</div>
+<div class="modal-body">
+  <div style="position:relative;width:830px;">
+    <div style="background:white;width:401px;height:481px;position:relative;">
+      <div class="ItemSlot Row0 Col0"></div>
+      <div id="back" class="ItemSlot ItemContainer Row0 Col1" style="background:url(images/inv_back.png);"></div>
+      <div id="hat" class="ItemSlot ItemContainer Row0 Col2" style="background:url(images/inv_head.png);"></div>
+      <div id="neck" class="ItemSlot ItemContainer Row0 Col3" style="background:url(images/inv_neck.png);"></div>
+      <div class="ItemSlot Row0 Col4"></div>
+      <div id="chest" class="ItemSlot ItemContainer Row1 Col0" style="background:url(images/inv_chest.png);"></div>
+      <div class="ItemSlot Row1 Col4"></div>
+      <div id="arms" class="ItemSlot ItemContainer Row2 Col0" style="background:url(images/inv_arms.png);"></div>
+      <div id="hands" class="ItemSlot ItemContainer Row2 Col4" style="background:url(images/inv_hands.png);"></div>
+      <div id="weapon" class="ItemSlot ItemContainer Row3 Col0" style="background:url(images/inv_weapon.png);"></div>
+      <div id="shield" class="ItemSlot ItemContainer Row3 Col4" style="background:url(images/inv_shield.png);"></div>
+      <div id="rightring" class="ItemSlot ItemContainer Row4 Col0" style="background:url(images/inv_rightring.png);"></div>
+      <div id="leftring" class="ItemSlot ItemContainer Row4 Col4" style="background:url(images/inv_leftring.png);"></div>
+      <div id="waist" class="ItemSlot ItemContainer Row5 Col0" style="background:url(images/inv_waist.png);"></div>
+      <div id="feet" class="ItemSlot ItemContainer Row5 Col4" style="background:url(images/inv_feet.png);"></div>
+      <img src="images/paperdoll.png" style="position:absolute;left:81px;top:81px;" />
+    </div>
+    <div style="padding-left:10px;width:415px;position:absolute;left:405px;top:0px;">
+      <b>Gold:</b> <span id="inv_gold"></span><br/>
+      <b>Bag</b>
+      <div id="bag" style="margin-bottom:10px;height:233px;" class="NonEquipped ItemContainer"></div>
+      <b>Ground</b>
+      <div id="floor" style="height:156px;" class="NonEquipped ItemContainer"></div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" data-dismiss="modal">Close</button>
+</div>
+

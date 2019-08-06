@@ -1,0 +1,725 @@
+Version 1 - 22-Nov-2010
+- Started change log
+- Fixed major bug with Point.adjacent_to()
+- Refactored SpellEffect class hierarchy
+- Added Projectile and Splat spell effects
+- Refactored Actor class hierarchy
+- Added Monster class
+
+Version 2 - 06-Apr-2011
+- Added tooltips for monsters
+- Added hoverIntent library
+
+Vection 3 - 07-Apr-2011
+- ViewPort class (creating tiles, loading map tiles, larger map support, shifting map, more JQuery)
+- Player now uses an instance of Actor
+
+Version 4 - 09-Apr-2011
+- More work on diagonal weirdness
+- KeyDown movement now relies on Vector rather than directly manipulating CSS top/left properties.
+- Added a couple new tiles
+- changed viewport shift threshold to 1 to eliminate some weirdness
+- Spells now use the Player as the source.
+- Monsters will shift and show/hide as the map moves around
+
+Version 5 - 03-Jul-2011
+- Rewritten to support HTML5 and canvas drawing. Most of the JQuery is gone. Actually, most of the code is gone.
+- Map now attempts to centre the player in the viewport after every move. This eliminates all the weird behaviour from the old algorithm.
+
+Version 6 - 04-Jul-2011
+- Sped up logging with JQuery and capped at 1000 lines to prevent performance issues with really big logs.
+- Mouse handling routines added. Needs some refactoring.
+- Click-and-drag functionality for player movement.
+- Clicking for adjacent enemies to make a melee attack.
+- Appears to possibly be a memory leak somewhere (FF5 grows large, IE9 and Chrome look fine... could just be that FF5 is shit)
+- Upgraded JQuery library to 1.6.2 from 1.4.x (seems to have improved the FF5 memory issues) 
+
+Version 7 - 05-Jul-2011
+- HTML5 spell animation engine created.
+- Class structure for spell effects created.
+  - Added fading and fading+rotating effects for single point spells.
+- Added splat animations for monster deaths.
+- Test buttons added to demo new animation features. Death Splat button always tries to animate at (5,5) whether or not that square is visible. Fizzles are displayed at raw coordinates.
+
+Version 8 - 12-Sep-2011
+- Projectile spell effect added.
+- Improvements to animation queue to support chaining spell effects together.
+- Fixed fade spell effect to prevent negative alpha.
+- Test button for projectile spell test in all directions.
+- Magic Missile button added to target a tile by clicking.
+
+Version 9 - 13-Sep-2011
+- Scaling and Area spell effects added
+- Test button for Area effect added
+- Burninate button added to target a tile by clicking.
+
+Version 10 - 14-Sep-2011
+- Refactored how ProjectileSpellEffect handles arriving at a target or encountering an obstacle.
+- Added actions to spell animations allow spells to have consequences upon resolving.
+- Refactored how Monsters are killed.
+- Removed several unnecessary debug messages to reduce log clutter.
+- Cleaned up process_click()
+- Eliminated the remainder of the old JQuery spell system.
+
+Version 11 - 15-Sep-2011
+- Add splat_queue to animate splats after all other animations are completed.
+- Made the main page less ugly.
+
+Version 12 - 18-Sep-2011
+- First version of new tooltips (overrides right-click events on the canvas only).
+
+Version 13 - 19-Sep-2011
+- Moved everything into a Git repository
+- Cleaned up the tooltip code substantially.
+- Preliminary work for enemy AI (monsters will move around randomly or stay put)
+- Monsters could theoretically hit you if they get lucky but it doesn't do anything except trigger a poorly constructed sentence in the log.
+
+Version 14 - 14-Oct-2011
+- Bug fixes:
+  - Random clicks no longer cause turns to occur
+  - Tiles are no longer considered adjacent to themselves
+- General
+  - Melee events can have sources other than the Player
+  - Updated melee combat resolution system so that it outputs some messages that are grammatically correct.
+  - Added a method for determining line of sight
+  - Tooltips will state that you cannot see a tile if it is not within line of sight (i.e. blocked by an obstacle)
+  - Various other cleanups
+  - Fixed some serious fuck-ups with dragging the Player around with the mouse which weren't immediately apparent until monsters started doing stuff
+- Monsters:
+  - Added Hill Giant (oh shit!)
+- Enemy AI changes:
+  - Monsters will use line of sight to determine if they can see you
+  - Monsters will move to attack if you are within a certain distance (Rat Mans have bad eyes)
+  - Monsters that don't have line of sight or are too far away from you have a 50% chance of just wandering around
+  - Certain monsters can see far and have a chance of deciding to cast a spell at you rather than move
+- Spell changes:
+  - New method for calculating positioning for ProjectileSpellEffect
+  - Spells can now have a source actor that is not the Player
+  - Added the boulder spell effect
+- Debugging
+  - Added a Do Turn debug function to intentionally make a nop turn occur
+  - Added debug options to freeze all monster movement and prevent monster spell casting
+  - Removed several debug messages that were spamming the log
+  
+Version 15 - 23-Oct-2011
+- Bug fixes
+  - Right-clicking on the Player no longer causes a NaN error with the line of sight code
+- Spell changes:
+  - Added ConeSpellEffect for cones in cardinal directions
+  
+Version 16 - 25-Oct-2011
+- General
+  - You must drag the mouse cursor at least 12 pixels into a tile before the Player will move. This prevents needing surgical precision to drag the Player diagonally.
+  
+Version 17 - 30-Oct-2011
+- Spell changes
+  - Added DiagonalConeSpellEffect for cones in diagonal directions
+  - Added support for cone spells to do damage
+  - Added FIRE BREATH to the spell menu!
+- General
+  - Switched to Google CDN for JQuery host so I don't have to maintain a copy of the latest release
+  - Allowed Points to be constructed by passing in another Point as the first parameter to the constructor
+  
+Version 18 - 02-Nov-2011
+- Graphics
+  - Scaled tile size down to 32x32. It's a more standard size and easier to get tile graphics and makes the player and monsters look closer together when adjacent.
+- Spell changes
+  - The condition where a monster hits another monster with a projectile will have a proper message in the log.
+- Map Generator
+  - First generation of random map generator accessible via the "Map Generator" link
+- General
+  - Added QUnit testing library
+
+Version 19 - 06-Nov-2011
+- General
+  - Fixed issue where dragging the Player into an obstacle or monster triggered multiple game turns
+  - Fixed issue where dragging the Player adjacent to a monster did not result in the monster attempting to make a melee attack
+  - Started using a Javascript minimizer for all script files
+- Map Generator
+  - Implemented more unit tests
+  - Rooms will be generated at random sizes and fill the map using the "pack rooms" layout
+
+Version 20 - 07-Nov-2011
+- General
+  - Streamlined some aspects of the publishing script
+- Map Generator
+  - More unit tests and refactoring
+  
+Version 21 - 09-Nov-2011
+- Map Generator
+  - More unit tests and refactoring
+  - Added DoorMaker and some preliminary rules for adding entrances to rooms
+  
+Version 22 - 11-Nov-2011
+- Map Generator
+  - Updated DoorMaker so that doors can no longer be adjacent to each other
+  - Added TunnelMaker
+  
+Version 23 - 04-Dec-2011
+- General
+  - Upgraded to jQuery 1.7.1
+- Map Generator
+  - Fixed a major problem with TunnelMaker that was creating tunnels within the boundaries of every room
+  - Added TunnelCrusher to collapse deadend tunnels 50% of the time
+- Debugging
+  - Added a "Switch to Random Map" button to demonstrate large maps. Only two tiles are currently used in the conversion step right now.
+    - Things look a little funny since certain tiles are meant to hold doors eventually, and the switch process can get you stuck inside a wall. Keep clicking until it works.
+
+Version 24 - 08-Dec-2011
+- Inventory
+  - Proof of concept work with jQueryUI for creating an inventory system (click the "Inventory TPOC" link on the main page)
+  
+Version 25 - 26-Dec-2011
+- General
+  - Switched to XML configuration file with an AJAX pre-loader instead of JSON
+  - Cleaned up the game load sequence
+  - Moved Monster initialization to the proper location
+- Inventory
+  - Updated Inventory layout
+  
+Version 26 - 30-Dec-2011
+- Inventory
+  - Refactored some of the jQuery UI code for moving items between sortable containers
+  - Borders for equipped items are now hidden
+  - Cleaned up CSS styles
+  - Added a bunch of dummy items to make a more useful demo
+  
+Version 27 - 02-Jan-2012
+- General
+  - Incorporated the Inventory TPOC into the main application. Click the Inventory button or press "I" to launch the dialog.
+  - Added PlayerActor class 
+  - Refactored how Monsters are drawn so the same code can be used for Items that are on the floor
+  - Added list of keyboard shortcuts
+- Inventory
+  - Implemented basic inventory system for tracking items on the floor and items that are equipped or in the Player's bag
+  - Added InventoryManager and Item
+  - Implemented XML data for Items and Item images
+  
+Version 28 - 04-Jan-2012
+- General
+  - Simplified tooltips so they are less annoying to use.
+  - Items on the ground are now listed in tooltips
+  - Moved Shortcuts button down to beneath the log to save some space
+
+Version 29 - 05-Jan-2012
+- Bug fixes
+  - ConeEffectSpell was incorrectly using splash damage as its damage value 
+- Inventory
+  - Multiple items on the same floor tile will now be displayed as a special icon
+  - Ported over several more dummy items from the Inventory TPOC
+  - Equipping items will now affect how your character looks!
+- Spells
+  - Refactored spell images to be the same structure as item images
+  - Refactored SpellEffect instantiation to be more generic
+  
+Version 30 - 15-Jan-2012
+- General
+  - Added DungeonManager and Level classes
+  - Refactored map tiles, monsters and items collections so Levels have their own contents (removed the old global arrays)
+  - Refactored some debugging code to create the default debug Level
+
+Version 31 - 18-Jan-2012
+- General
+  - Eliminated last remaining JSON config (tile) and jQuery plugin for parsing (it's built into the recent versions anyways for future use)
+  - Refactored Tile to separate passable from the image
+  - Added explored, lit and room_id flags to tiles
+  - Updated draw_map to draw white squares for unexplored tiles and overlay a 50% alpha black square for unlit tiles
+  - Tiles adjacent to the player are marked as explored as you move around.
+  - Level now contains a list of room locations 
+- Map Generator
+  - Redefined how room_id is specified on a room.
+  - Room lighting is a 50% chance of lit vs unlit
+  - Expanded functionality for creating an entire Level out of a map generation run
+- Debugging
+  - Expanded test map to include some unexplored tiles
+  - Expanded the Test Level creation to accommodate MapGenerator and Tile changes.
+  
+Version 32 - 20-Jan-2012
+- Bug fixes
+  - Fixed an undefined value error with AreaSpellEffect and ConeSpellEffect when resolving damage values.
+- General
+  - Refactored draw_map()
+  - Monsters are only drawn if you have a) line of sight and they are in a lit tile OR b) they are directly adjacent to you.
+  - For Monsters in category A above, tiles between the Player and the Monster will NOT be revealed
+  - Enhanced tooltips to provide more information based on line of sight and exploration
+- Debugging
+  - Fixed AoE and Cone tests to support the Level changes
+  - Expanded the test map to include some dark tiles with Monsters and items.
+  - Added some Monsters and Items to unexplored tiles.
+  - Added Reveal Map test option
+  - Added DETECT_MONSTERS debug flag
+  - Added Debug Flags popup to allow for setting flag values without having to edit the code constantly.
+  
+Version 33 - 28-Jan-2012
+- General
+  - Added the Verbs menu and preliminary system for handling actions that are not casting or melee attacks
+  - Added Search action to check tiles that are adjacent to the Player for secret doors and reveal them!
+  - Moved the final images into organized sub-directories
+  - Refactored tooltips to handle listing items more generically
+  - Line-of-sight will now check what is "transparent" rather than if a tile is passable (i.e closed doors are passable but not transparent)
+- Map Generator
+  - Added Doors (open, closed, secret) along with appropriate changes to obstacles, etc
+  
+Version 34 - 29-Jan-2012
+- General
+  - Added a common function to standardize how random events are determined
+  - Doors that have not been discovered will no longer be drawn on the map.
+  - Monsters can no longer occupy the same tile as the Player when the Player is in a door tile (oops)
+  - Fixed an issue where clicking on a door would trigger a melee attack on "undefined."
+  - Added Open verb to open doors that are adjacent to the Player.
+  - Added Close verb to close doors that are adjacent to the Player.
+    - Doors can be blocked from being closed by a monster or items on the floor.
+  - Updated Shortcuts popup with new keyboard shortcut information
+  - Doors can be smashed to bits by spells!
+- Bug fixes
+  - Fixed an issue where Splats resulting from a Monster-on-Monster kill (hill giant boulders) would not animate until the Player did something
+
+Version 35 - 12-Feb-2012
+- General
+  - Added texture bundles to provide some variety in the type of images that get displayed for floors and walls
+  - Inverted the chance for a door to be marked as secret (literally everything was showing up as a secret door)
+  - In Prod mode, the map will now default to starting the Player in the center of a random room rather than on the debug level
+  - Added area to display HP and Mana values
+
+Version 36 - 13-Feb-2012
+- General
+  - Refactored some Dungeon code to use callbacks to manipulate tiles (no more duplicated loops)
+- Spells
+  - Added MapFadeOut and GAME OVER MAN test for eventual Player death usage.
+  - Added Light spell to light up rooms or adjacent tiles around the target tile
+  
+Version 37 - 14-Feb-2012
+- General
+  - Added GameTime to keep track of time in game for RPG nerdiness and event queueing
+  - As a test, everytime you move, the game clock increments by 3 seconds
+  
+Version 38 - 15-Feb-2012
+- General
+  - Moving repeatedly into a wall by pressing the arrow keys will no longer trigger a bunch of turns (didn't notice until testing out the GameTime code)
+  - Moving, attacking and casting spells now increments the game clock by one round (six seconds)
+  - Search is now a "long action" which takes one minute to complete
+  - Long actions are interruptible if a monster appears adjacent to the Player or the animation queue fills up at any point during the action
+  - The Player will regain 1 hit point every minute
+  - Added Rest Until Healed verb to wait X minutes until the the player reaches max HP or is interrupted
+  - Spells now cost mana. If you don't have enough mana, you can't cast the spell.
+  - Added Sleep Until Mana is Restored verb to attempt to sleep 8 hours.
+    - If interrupted at any point while sleeping, you will regain a percentage of mana based on how long you slept
+    
+Version 39 - 18-Feb-2012
+- General
+  - Fixed a bug that delayed cone effects from animating until after the next Player move
+  - Implemented some significant performance enhancements in the line-of-sight algorithms that was affecting the Sleep action
+    - Think 83 million calls down to 1.4 million (!)
+    - Only attempt a line-of-sight calculation from a monster if the Player is within its sight range
+    - Only check for the presence of a door if we are looking at a door tile specifically
+    - Allocate some objects outside of several loops
+  - The random map will now include a number of RATMANS equal to the number of rooms on the map
+  - Decreased the size of the random map from 100x100 to 50x50 and decreased the maximum size of a room from 13 to 11
+
+Version 40 - 22-Feb-2012
+- General
+  - Rearranged some code to allow for the Prod version to spawn monsters during level generation.
+  - Turned off debug messages in the Prod version (they can be turned on via the Debug Mode debug flag).
+  
+Version 41 - 27-Mar-2012
+- General
+  - Added Dungeon Level indicator
+  - Added stair location generation
+- Bug fixes
+  - Fixed door tiles on the debug map so that they are now marked as entrances
+  
+Version 42 - 02-Apr-2012
+- General
+  - Added Climb Down Stairs and Climb Up Stairs verbs
+  - Stairs can be used to navigate between dungeon levels. Generated levels will save all information until the game is reset.
+  - Going down stairs will start the Player at the Stairs UP location for the next level. If that level has never been visited before, a new level is generated.
+  - Going up stairs will start the Player at the Stairs DOWN location for the previous level.
+  
+Version 43 - 04-Apr-2012
+- General
+  - Implemented Widget class (room decorations)
+  - Converted stairs to be widgets
+  - Levels will now have one Stairs DOWN for every 5 rooms, and one Stairs UP for every Stairs DOWN that existed on the previous level (Level 1 has no Stairs UP)
+  - Using stairs will always take you to the corresponding staircase on the next level (although the location may not correspond geographically! No one said dungeons should make sense)
+- Bug fixes
+  - Keyboard actions can no longer be used while a dialog is open (except for T when the Inventory is displayed)
+  
+Version 44 - 06-Apr-2012
+- General
+  - Upgraded to jQuery 1.7.2 and jQuery UI 1.8.18
+  - Stair descriptions are now displayed in tooltips
+  - Reduced map size from 60x60 to 50x50. Maps seem to be much more manageable now.
+  - Added the Minimap (click the Map button or press M) to display everywhere that you've explored! No more getting lost!
+- Bug fixes
+  - Going up stairs will now mark the adjacent tiles as explored
+- Debugging
+  - Added function to reveal all secret doors
+  
+Version 45 - 14-May-2012
+- General
+  - Added jStorage library.
+  - TPOC work for loading/saving data from LocalStorage.
+  
+Version 46 - 07-Jul-2012
+- General
+  - Improved load/save TPOC with jQuery extend.
+  
+Version 47 - 15-Jul-2012
+- General
+  - Refactored Actor and Item so that they no longer store references to DOM images (allows easy JSON conversion)
+  - Updated load code so that the Player can now be loaded.
+
+Version 48 - 16-Jul-2012
+- Storage
+  - Updated load code so that Items can now be loaded.
+  - Added generic method to Storage for loading collections.
+  - Inventory will reload and display equipped items.
+  
+Version 49 - 20-Jul-2012
+- Storage
+  - Added load code to all remaining objects as required.
+  - Load/save can now be used to save and restore an entire game (up to the point where localStorage is full for the domain).
+  
+Version 50 - 23-Jul-2012
+- General
+  - Cleaned up some CSS items
+  - Fixed an IE display issue in the Stats section
+- Storage
+  - Implemented Load UI and TPOC for Save UI
+  - Refactored underlying structure of GameStorage to support multiple saved games.
+  
+Version 51 - 25-Jul-2012
+- Storage
+  - Added the ability to delete and overwrite saved games.
+  - Added the ability to create new saved games with a description.
+  - Added confirmation messages for destructive Storage operations (overwrite, delete)
+  - Cancelling the Storage popup or pressing ESC will no longer perform the action anyways
+  - Improved the timestamp on saved games
+  
+Version 52 - 29-Jul-2012
+- Storage
+  - Fixed an issue where unequipped items in the Player's bag would not be displayed
+- Inventory
+  - Added the ability to equip rings and swap between the LeftRing and RightRing slot
+- General
+  - Fixed an issue where double right-clicking on a non-empty cell would display an blank tooltip.
+  - Fixed crashing unit tests that occurred when I added Storage.
+- Spells
+  - Area spells will now explode in the last-known clear cell when encountering a wall. This prevents AoE through walls.
+  
+Version 53 - 30-Jul-2012
+- General
+  - Added traps (one-time and auto-resetting)
+    - Searching a tile will uncover any traps. One-time traps can only be triggered once. Traps that reset can be triggered infinitely.
+  - Refactored several duplicated methods into generic functions for grabbing things from collections
+  - Refactored secret doors so that traps can reuse most of their code 
+
+Version 54 - 01-Aug-2012
+- General
+  - Added Disarm verb. Non-resetting traps that have been triggered already cannot be disarmed.
+    - Disarming a trap is a long action that takes one minute and can be interrupted.
+  - Traps will now be randomly located throughout a dungeon, except on stairs
+  - Fixed an issue where non-resetting traps that had been discovered would not be triggered if you walked over them
+- Debugging
+  - Added option to reveal all hidden traps
+  - Fixed an issue where switching to a random map while on a dungeon level greater than 1 caused a crash
+- Inventory
+  - Added the ability to double-click on non-equipped items in your Inventory to take/drop them.
+  
+Version 55 - 02-Aug-2012
+- General
+  - Added monster behaviour. Monsters can either be aggressive, passive or inert.
+    - Passive monsters become aggressive when approached or attacked
+    - Inert monsters can only attack adjacent targets and don't move
+  - Added a new monster: the DISGUSTING SLIME!
+  - Traps can no longer appear in the same tile as a door 
+  - Added a progress bar for loading images (the bar only shows in Chrome and Firefox, but all browsers will display a percentage)
+  - Cleaned up some debug messages.
+  
+Version 56 - 03-Aug-2012
+- General
+  - Added Bootstrap library for buttons and dropdowns.
+  - Converted old dropdowns into new toolbar layout. Production page still needs to be updated.
+  
+Version 57 - 08-Aug-2012
+- General
+  - CSS fixes for new toolbar
+  - Converted load progress bar to use browser-compatible Bootstrap progress bar styles.
+  - Fixed CSS styles for jQuery UI dialog buttons due to Bootstrap overlaps
+- Storage
+  - Fixed an issue with timestamps for minute values under 10 
+  
+Version 58 - 09-Aug-2012
+- General
+  - Added keybindings for Numlocked versions of the numpad keys (not sure why I didn't have this long ago...)
+  - Updated spell-casting to use a dynamic toolbar (currently non-configurable)
+    - Keybindings for spell buttons are 1-7
+  - Fixed some inconsistencies surrounding when toolbar buttons were toggled
+  
+Version 59 - 11-Aug-2012
+- General
+  - Upgraded to jQueryUI 1.8.21
+  - First implementation of Customize Spell Menu
+  
+Version 60 - 12-Aug-2012
+- General
+  - Disallowed a spell from being assigned to multiple buttons on the Customize Spell Menu dialog.
+  - Spell menu settings are now saved 
+  - Implemented TPOC for Item Effects (normal vs magic vs cursed). Click the Item Effect TPOC link to view.
+- Spells
+  - Added several more spells
+  
+Version 61 - 13-Aug-2012
+- General
+  - Implemented CSS for vertical progress bars (i.e. player stat bars)
+  
+Version 62 - 14-Aug-2012
+- General
+  - Cleaned up CSS for vertical progress bars
+  - Implemented start of New Game dialog.
+  
+Version 63 - 26-Aug-2012
+- General
+  - Upgraded to Bootstrap 2.1
+  - Converted Inventory, Customize Spell Menu, Shortcuts, Debug Flags and Minimap to use Bootstrap modals instead of jQueryUI dialogs
+    - Several large dialogs now use remote content files to reduce the size of the index.html
+
+Version 64 - 27-Aug-2012
+- General
+  - Various CSS fixes
+  - Converted Load/Save Game and New Game to Bootstrap
+  
+Version 65 - 28-Aug-2012
+- General
+  - Upgraded to jQuery 1.8.0 and jQueryUI 1.8.23
+  - Fixed an issue where creating a new saved game for the first time would trigger the entire page to refresh
+  - Fixed several issues on the Inventory popup related to the Bootstrap conversion
+
+Version 66 - 30-Aug-2012
+- General
+  - Implemented functionality for Take toolbar button
+  - Converted Customize Spell Menu dropdowns to use Chosen library (http://harvesthq.github.com/chosen/)
+    - Needed to make some minor fixes to the library to show/hide the dropdown rather than hide it via left:-9000px (seriously WTF)
+  - Fixed an issue where Customize Spell Menu dropdowns would keep their selections between popup displays despite clicking Cancel
+  
+Version 67 - 03-Sep-2012
+- General
+  - Refactored some of the game initialization code to support starting new games on the fly
+  - Refactored Inventory and Minimap initialization
+  - Implemented starter spell list and data validation on New Game popup
+  - The New Game popup will now launch a new game when completed.
+  - In Prod, the New Game popup will be displayed if no saved games are detected on first load, otherwise Load Game will be displayed.
+- Debugging
+  - Added option to learn all existing spells
+  
+Version 68 - 04-Sep-2012
+- General
+  - Toolbars and mouse/keyboard events are disabled when there is no active game.
+  - Cancelling out of New Game or Load Game popups during the initial load will no longer cause exceptions.
+  
+Version 69 - 06-Sep-2012
+- General
+  - Creating a new game or loading a saved game prompts for confirmation if another game is already in progress
+  - Fixed an issue where creating/loading multiple games would rebind mouse and keyboard events repeatedly
+  - Initial prototype of Character Info popup
+
+Version 70 - 07-Sep-2012
+- General
+  - Character Info popup layout updated with some stats (many items are dummy value)
+  - Added Number.toCommas() method for formatting numbers with commas (i.e. 1,234,567)
+  - The +/- buttons on the New Game popup now allow for click-and-hold functionality
+  - Adjusted the starting allocation of stat points to be 4x32 with 100 additional points.
+  - Saved game info will now list Player level (all pre-existing saved games will show the Player level as "undefined")
+
+Version 71 - 11-Sep-2012
+- General
+  - Player stats are now assigned during game creation and displayed on the Character Information popup
+  - You will now be prompted if your game has not been saved when you attempt to leave the page in Production
+  
+Version 72 - 20-Nov-2012
+- General
+  - Upgraded to Bootstrap 2.2.1
+  - Upgraded to jQuery 1.8.3 and jQueryUI 1.9.1
+  
+Version 73 - 09-Dec-2012
+- General
+  - Upgraded to Bootstrap 2.2.2 (removed several hacks due to Bootstrap fixes)
+- Debugging
+  - Moved default spell toolbar list to a central location (after hunting for it for 15 mins)
+  - Upgraded to QUnit 1.10 and updated unit testing code
+  - Moved unit tests into their own page accessible via the Unit Tests link rather than combining them with the MapGen test 
+- Spells
+  - Added framework for self-target spells (Dimension Door - no effect yet)
+  - Refactored SinglePointRotatingFadingSpellEffect to use map targets rather than raw coords
+  
+Version 74 - 10-Dec-2012
+- Spells
+  - Completed implementation of Dimension Door spell to teleport to a random empty space between 5-10 tiles away.
+  
+Version 75 - 12-Dec-2012
+- General
+  - Added framework for status effects (adding, removal)
+- Debugging
+  - Added a Prod version of test.html
+  - Added a Test Status Effect item to create a 6-round test effect
+  
+Version 76 - 16-Dec-2012
+- General
+  - Dungeon levels can now have randomized monster types spawn based on rarity related to the dungeon level (i.e. harder monsters become more common in lower levels)
+- Monsters
+  - Inert monsters can now cast spells on adjacent targets (i.e. the Disgusting Slime can poison you now!)
+  - Added a bunch of new monsters!
+- Status Effects
+  - XML configuration for status effects
+  - Updated status effect framework to support multiple types of effects (buffs, curses, poisons) and change the label colour
+  - Added poison effect
+    - Poison effects overwrite each other with more powerful versions or extend the duration of the current poison
+  - Added loading/saving to status effects
+- Spells
+  - Added StatusEffectSpell to apply any status effect on any actor
+  - For now, all spells are counted as Level 1
+  - Fixed some grammar errors with ConeEffectSpell log messages
+
+Version 77 - 02-Jan-2013
+- Spells
+  - Fixed a bug with cone spells that would move the target actor's location to the calculated target of the cone spell
+  
+Version 78 - 11-Mar-2013
+- General
+  - Preliminary setup for applying stat changes to the Player (via items or status effects etc)
+  - Upgraded to QUnit 1.11
+  - Upgraded to jQuery 1.9.1 (and made appropriate changes to DataLoader to handle changes to find() chaining)
+    - Temporarily added jQuery Migrate to the Debug page to provide warning if any deprecated features are used
+- Status Effects
+  - Refactored the way status effects get created/replaced so that the code is more generalized
+  - Made unit tests much more robust (sometimes they were failing on consecutive runs due to Time object not being reset)
+  
+Version 79 - 12-Mar-2013
+- General
+  - Worked around a problem with jQuery 1.9.1 and Firefox with preloading images and $.find(). Everything functions in all browsers again.
+  - Upgraded to jQueryUI 1.10.1, Bootstrap 2.3.1 and Chosen 0.9.12
+- Status Effects
+  - Fixed status effects so that they load correctly once again.
+  
+Version 80 - 14-Apr-2013
+- General
+  - Prevented movement keys from triggering browser window scroll events.
+- Status Effects
+  - Added PassiveStatChangeStatusEffect with several new spells to demonstrate primary and secondary stat changes.
+  - Completed method for applying stat changes to Actors
+  
+Version 81 - 15-Apr-2013
+- General
+  - Added a horizontal progress bar for Player XP on the Character Information popup
+  - If any damage is received during a long action, the action is immediately interrupted (i.e. no sleeping while affected by poison)
+- Status Effects
+  - Status effects will now continue to run while long actions are attempted.
+  - Status effects on monsters will be removed when the monster is dead.
+
+Version 82 - 24-Apr-2013
+- General
+  - Upgraded to jQuery 2.0.0 (Canvas isn't supported by old versions of IE anyways!)
+
+Version 83 - 25-Dec-2013
+- General
+  - Converted to a Visual Studio 2013 project
+  - Rearranged some of the TPOC folder structure to clean things up
+  - Fixed Kill All Monsters and Test Status Effect debug tests which broke sometime after v78
+  - Upgraded to jQuery 2.0.3
+
+Version 84 - 29-Dec-2013
+- General
+  - Added ImageCombiner to produce a single image out of any number of smaller images.
+  - Converted everything except for Spell Images to use a single image rather than multiple individual images.
+    - This reduced the number of HTTP requests for images from 80 to 26 during startup.
+    - Updated the appropriate locations to draw a small portion of an image rather than the whole thing.
+- Inventory
+  - Fixed an issue with headgear items not being able to be equipped.
+  - Switched item boxes to use canvas instead of img.
+
+Version 85 - 30-Dec-2013
+- General
+  - Changed combined image columns from 10 to 12 since it works better for math.
+- Spells
+  - Updated spells to use the new combined image method added for everything else in v84.
+    - This further reduced image load requests from 26 down to 6. New method of loading images seems to have improved page load time by over full second.
+  - Switched spell toolbar to use canvas instead of img.
+
+Version 86 - 18-Apr-2014
+- General
+  - Upgraded to jQuery 2.1.0, jQueryUI 1.10.4, Chosen 1.1.0 and QUnit 1.14.0
+  - Upgraded to Bootstrap 3.1.1 and consequently had to rearrange a lot of popup work. Much more CSS work is still required.
+  - Updated ImageCombiner to prevent a GET operation when loading the XML file for game data. Apparently Image triggers some kind of extra processing in jQuery or the browser.
+
+Version 87 - 19-Jun-2014
+- Status Effects
+  - Fixed layout due to changes in Bootstrap 3.1.1
+
+Version 88 - 03-May-2016
+- General
+  - Updated publishing script for Windows 10 environment
+  - Updated Prod index.html layout due to Bootstrap 3.1.1 changes
+- Widgets
+  - Fixed a constructor conflict between Traps and Widget
+  - Added animated widgets. Image will cycle to the next frame in the list on each turn. Long-term, this will be a constant animation.
+
+Version 89 - 04-May-2016
+- General
+  - Switched to CDN for Bootstrap CSS to avoid permissions problem with Win10 font files
+- Widgets
+  - Animated widgets will start on a random frame (added 2 more firepit frames for variety)
+  - Added support for widgets that cannot be walked through
+  - Added a lot more widgets
+- Map Generator
+  - Added random widgets to rooms.
+
+Version 90 - 06-May-2016
+- General
+  - Upgraded to Bootstrap 3.3.6 and switched to full Bootstrap CDN usage
+  - Fixed some CSS related to Bootstrap update
+  - FIXED: Creating a new game closes the dialog randomly when clicking the +/- buttons for stats. Seems like upgrading Boostrap fixed the issue, as well as removing the holdit() method.
+  - Redesigned character stats to be more like a d20 system.
+  - FIXED: Clicking a toggle button (i.e. a spell) then clicking Inventory will leave the button in a toggled state permanently. Current action is now cancelled in open_dialog().
+  - FIXED: Dimension door can sometimes pick a spot that is not on the map. Location inbounds check was using maximum map dimensions instead of actual map dimensions.
+  - FIXED: Status effects not extending existing effect of the same type (you can get more than one poison from the same ooze). Test code from Version 87 was not undone.
+  - CLOSED: Grammar for cone spells is wrong when monster is the source (monster on monster kill). Doesn't appear to be an issue?
+  - FIXED: Maximizing the window makes the page layout weird
+
+Version 91 - 16-May-2016
+- General
+  - Added static animations for widgets! Speed can be controlled via XML settings.
+
+TODO
+============
+- FEATURE: Need to redesign New Game popup. Something about buttons makes it act weird and keep refreshing the page (Bootstrap class stuff??)
+- BUG: Some wall tiles get marked as "too dark to see" based on what's on one side vs the other... need some kind of directional tooltip?
+- BUG: Appears to be some problems with tooltips deciding if it's too dark or not for Widgets
+- BUG: Monsters can spawn ontop of the Player
+- BUG: Monsters going through doors that have been explored but are not within sight appear to magically open... need a way to hide this
+- BUG: Right-clicking then dragging onto the tooltip and releasing displays the browser's right-click menu and leaves the tooltip displayed
+       Tooltip should move with mouse cursor
+- BUG: Changes made to monster behaviour do not affect saved games (i.e. spell cast)... probalby need to reload certain stats
+- BUG: Widgets need to be displayed on the minimap
+- BUG: Widgets will load all their settings from the save, but certain ones should come from XML (like animation speed)... likely applies to everything
+- Setting for random character creation?
+- Quick save feature -- WHAT KEY?
+- Fail gracefully for incompatible browsers
+- Option to launch new game
+- Touch events?
+- Add more text options so the log doesn't look so boring
+- dynamic sizing of viewport based on window size... needs to have min/max dimensions set
+- Belts should have utility slots
+- Items in the inventory need detailed tooltips
+- Gold
+- Drag items onto body picture in Inventory to auto-equip
+- Tooltips need to be split into two sections (one for detection and one for seeing/map showing)... split off num_items?
+- Elite monsters (fancy names)
+- Spawn more monsters at certain intervals
+- Spawn items inside rooms and when monsters die
+- Item stats, etc
+- Double click to auto-equip item if slot is empty
+- Status effects
+  - Tooltip over status effects to show remaining duration
+  - Persistent buff/debuff
+    - no set duration, requires some kind of event to activate/deactivate
+    - i.e. levitate or curse

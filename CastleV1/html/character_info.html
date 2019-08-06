@@ -1,0 +1,64 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">&times;</button>
+  <h4 class="modal-title">Character Information</h4>
+</div>
+<div class="modal-body">
+  <div style="font-size:14pt;font-weight:bold;">
+    <img id="ci_img" style="vertical-align:bottom;" /><span id="ci_name" style="margin-left:5px;"></span>
+  </div>
+  <div style="padding-top:5px;">
+    <span class="StatName">Experience</span>
+    <span id="ci_xp" class="Stat"></span>
+    <div class="progress" style="clear:both">
+      <div id="xp_bar" class="progress-bar blue"></div>
+    </div>
+  </div>
+  <div style="padding:0px 10px 10px;">
+    <div class="StatBar">
+      <span class="StatLabel">Strength</span>
+      <div class="v-progress tall">
+        <div id="ci_str_base" title="Maximum Strength" class="narrow-bar green"></div>
+        <div id="ci_str_current" title="Current Strength" class="narrow-bar2 blue"></div>
+      </div>
+    </div>
+    <div class="StatBar">
+      <span class="StatLabel">Intelligence</span>
+      <div class="v-progress tall">
+        <div id="ci_int_base" title="Maximum Intelligence" class="narrow-bar green"></div>
+        <div id="ci_int_current" title="Current Intelligence" class="narrow-bar2 blue"></div>
+      </div>
+    </div>
+    <div class="StatBar">
+      <span class="StatLabel">Dexterity</span>
+      <div class="v-progress tall">
+        <div id="ci_dex_base" title="Maximum Dexterity" class="narrow-bar green"></div>
+        <div id="ci_dex_current" title="Current Dexterity" class="narrow-bar2 blue"></div>
+      </div>
+    </div>
+    <div class="StatBar">
+      <span class="StatLabel">Constitution</span>
+      <div class="v-progress tall">
+        <div id="ci_con_base" title="Maximum Constitution" class="narrow-bar green"></div>
+        <div id="ci_con_current" title="Current Constitution" class="narrow-bar2 blue"></div>
+      </div>
+    </div>
+    <div class="StatBar Rounded" style="width:200px;height:190px;margin-left:5px;margin-top:20px;padding:5px;">
+      <span class="StatName">Character Level</span>
+      <span id="ci_lvl" class="Stat"></span><br />
+      <span class="StatName">Hit Points</span>
+      <span id="ci_hp" class="Stat"></span><br />
+      <span class="StatName">Mana</span>
+      <span id="ci_mana" class="Stat"></span><br />
+      <span class="StatName">Armor Value</span>
+      <span id="ci_ac" class="Stat"></span><br />
+      <span class="StatName">Gold</span>
+      <span id="ci_gold" class="Stat"></span>
+      <span class="StatName">Time</span>
+      <span id="ci_time" class="Stat"></span>
+    </div>
+  </div>
+</div>
+<div class="clearfix"></div>
+<div class="modal-footer">
+  <button class="btn btn-primary" data-dismiss="modal">Close</button>
+</div>

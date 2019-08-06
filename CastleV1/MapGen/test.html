@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <title>BROWSER OF THE WINDS - MAP GENERATOR TEST</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="../storage.js"></script>
+    <script type="text/javascript" src="../common.js"></script>
+    <script type="text/javascript" src="mapgen.js"></script>
+  </head>
+  <body>
+    <pre id="map"></pre>
+    <script type="text/javascript">
+	    var BLOCKED_CHAR = "B";
+			var NOTHING_CHAR = "#";
+			var ROOM_CHAR    = ".";
+			var PERIMETER_CHAR = "#";
+			var ENTRANCE_CHAR = "E";
+			var TUNNEL_CHAR = " ";
+			var DEADEND_CHAR = "X";
+    
+      $(document).ready( function()
+        {
+          var mapgen = new MapGenerator();
+          mapgen.generate_map();
+          draw_map( mapgen );
+        });
+      
+      function draw_map( mapgen )
+		  {
+		    var div = $("#map");
+		    
+		    for( var row = 0; row < MAP_HEIGHT; row++ )
+		    {
+		      var row_output = "";
+		      
+		      for( var col = 0; col < MAP_WIDTH; col++ )
+		      {
+		        row_output += this.get_cell_character( mapgen.map[row][col] );
+		      }
+		      
+		      div.append( row_output + "<br/>" );
+		    }
+		  }
+		  
+		  function get_cell_character( cell )
+		  {
+		    if( cell.is_deadend )
+		    {
+		      return DEADEND_CHAR;
+		    }
+		    else if( cell.is_entrance )
+		    {
+		      return ENTRANCE_CHAR;
+		    }
+		    else if( cell.is_corridor )
+		    {
+		      return TUNNEL_CHAR;
+		    }
+		    else if( cell.blocked )
+		    {
+		      return BLOCKED_CHAR;
+		    }    
+		    else if( cell.is_perimeter )
+		    {
+		      return PERIMETER_CHAR; 
+		    }
+		    else if( cell.room_id != -1 )
+		    {
+		      return ROOM_CHAR; 
+		    }
+		    
+		    else
+		    {
+		      return NOTHING_CHAR;
+		    }
+		  }
+    </script>
+  </body>
+</html>

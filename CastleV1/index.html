@@ -1,0 +1,270 @@
+<!DOCTYPE html> 
+<html>
+  <head>
+    <title>BROWSER OF THE WINDS</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="title" content="Browser of the Winds" />
+    <link rel="shortcut icon" href="http://members.shaw.ca/achimp/botw/images/monsters/ratman.png" />
+		<link rel="image_src" href="http://members.shaw.ca/achimp/botw/images/monsters/ratman.png" />
+    <link href="css/overcast/jquery-ui-1.10.1.custom.min.css" rel="stylesheet" type="text/css"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href="css/chosen.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="libs/chosen.jquery.min.js"></script>
+    <script type="text/javascript" src="libs/jstorage.min.js"></script>
+    <script type="text/javascript" src="full.js"></script>
+  </head>
+  <body style="margin:3px;">
+    Use arrows or num pad to move, OR click and drag the man to move. Click on MONSTERS or bump into them to attack! Select a spell from the menu, click Cast and then click a tile!<br />
+    <input type="hidden" id="processing" value="0"/>
+    <input type="hidden" id="command" value="0"/>
+    <a href="changelog.txt">Change Log</a> | <a href="MapGen/test.html">Map Generator</a> | <a href="test/test.html">Unit Tests</a> | 
+    TEST: <select id="test_menu">
+      <option value="0">TEST FIZZLES</option>
+      <option value="1">TEST SPLAT</option>
+      <option value="2">TEST PROJECTILES</option>
+      <option value="3">TEST AREA EFFECT</option>
+      <option value="6">TEST CONES</option>
+      <option value="7">TEST DIAGONAL CONES</option>
+      <option value="-1">------------------</option>
+      <option value="4">KILL ALL MONSTERS</option>
+      <option value="5">DO TURN</option>
+      <option value="8">REVEAL MAP</option>
+      <option value="10">REVEAL SECRET DOORS</option>
+      <option value="12">REVEAL TRAPS</option>
+      <option value="9">GAME OVER MAN</option>
+      <option value="11">ERASE LOCALSTORAGE</option>
+      <option value="13">LEARN ALL SPELLS</option>
+      <option value="14">TEST STATUS EFFECT</option>
+      <option value="15">TEST WEAK POISON</option>
+      <option value="16">TEST MINOR POISON</option>
+    </select>
+    <input type="submit" value="Run Test" onclick="run_test();"></input>
+    <br />
+    SPELL: <select id="spell_menu">
+      <option value="p1">MAGIC MISSILE</option>
+      <option value="p2">LIGHTNING BOLT</option>
+      <option value="p3">FIREBOLT</option>
+      <option value="a1">FIREBALL</option>
+      <option value="p4">BOULDER</option>
+      <option value="c1">FIRE BREATH</option>
+      <option value="u1">LIGHT</option>
+      <option value="u2">DIMENSION DOOR</option>
+    </select>
+    <input type="submit" value="Cast Spell" onclick="cast_spell_by_id( $('#spell_menu').val() );"/>
+    <input type="submit" value="Switch to Debug Map" onclick="switch_to_debug();"/>
+    <div id="game_area" style="margin-left:10px;margin-top:5px;position:relative;">
+      <div id="game_buttons" class="btn-toolbar" role="toolbar">
+        <div class="btn-group">
+          <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">Game <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li><a href="#new_game" role="button" data-toggle="modal">New Game...</a></li>
+            <li class="divider"></li>
+            <li><a href="#" onclick="Storage.open_load();">Load Game...</a></li>
+            <li><a id="save_game" href="#" onclick="Storage.open_save();">Save Game...</a></li>
+            <li class="divider"></li>
+            <li><a href="#shortcuts" role="button" data-toggle="modal">Shortcuts...</a></li>
+            <li><a href="#" onclick="Log.clear();">Clear Log</a></li>
+            <li><a href="#debug_flags" role="button" data-toggle="modal">Debug Flags...</a></li>
+          </ul>
+        </div>
+        <div id="verbs_bar" class="btn-group">
+          <button id="btn_inventory" class="btn btn-default" onclick="Inventory.open();">Inventory</button>
+          <button id="btn_map" class="btn btn-default" onclick="Minimap.open();">Map</button>
+          <button id="btn_search" class="btn btn-default" onclick="perform_action('search');">Search</button>
+          <button id="btn_disarm" class="btn btn-default" onclick="perform_action('disarm');">Disarm</button>
+          <button id="btn_take" class="btn btn-default" onclick="perform_action('take');">Take</button>
+          <button id="btn_verbs" class="btn btn-default dropdown-toggle" data-toggle="dropdown">More <span class="caret"></span></button>
+          <ul id="other_actions_menu" class="dropdown-menu pull-right">
+            <li><a href="#" onclick="perform_action('open');">Open</a></li>
+            <li><a href="#" onclick="perform_action('close');">Close</a></li>
+            <li><a href="#" onclick="perform_action('rest');">Rest Until Healed</a></li>
+            <li><a href="#" onclick="perform_action('sleep');">Sleep Until Mana is Restored</a></li>
+            <li><a href="#" onclick="perform_action('up');">Climb Up Stairs</a></li>
+            <li><a href="#" onclick="perform_action('down');">Climb Down Stairs</a></li>
+          </ul>
+        </div>
+        <div id="spell_bar" class="btn-group">
+          <button id="spell0" class="btn btn-default" onclick="cast_spell(0);"></button>
+          <button id="spell1" class="btn btn-default" onclick="cast_spell(1);"></button>
+          <button id="spell2" class="btn btn-default" onclick="cast_spell(2);"></button>
+          <button id="spell3" class="btn btn-default" onclick="cast_spell(3);"></button>
+          <button id="spell4" class="btn btn-default" onclick="cast_spell(4);"></button>
+          <button id="spell5" class="btn btn-default" onclick="cast_spell(5);"></button>
+          <button id="spell6" class="btn btn-default" onclick="cast_spell(6);"></button>
+          <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
+          </button>
+          <ul id="other_actions_menu" class="dropdown-menu pull-right">
+            <li><a href="#char_info" role="button" data-toggle="modal">Character Info...</a></li>
+            <li><a href="#customize_spells" role="button" data-toggle="modal">Customize Spell Menu...</a></li>
+          </ul>
+        </div>
+      </div>
+      <div style="position:relative;">
+        <canvas id="map" width="960" height="480" style="border:1px solid black;margin:0px;" oncontextmenu="return false;">
+          Canvas not supported. You must be using Internet Explorer 9, Firefox 4+, Chrome or Safari.
+        </canvas>
+        <div id="log" class="Information" style="width:810px;overflow-y:scroll;"></div>
+        <div id="stats" class="Information" style="width:152px;left:810px;border-left-width:0px;padding:3px;">
+          <div style="height:60px;">
+            <span class="StatName">Hit Points</span>
+            <span id="hp" class="Stat"></span><br />
+            <span class="StatName">Mana</span>
+            <span id="mana" style="float:right;color:blue;"></span><br />
+            <span class="StatName">Time</span>
+            <span id="time" class="Stat"></span>
+            <span class="StatName">Dungeon Level</span>
+            <span id="level" class="Stat"></span>
+          </div>
+          <div id="effects" class="clearfix"></div>
+        </div>
+      </div>
+      <div id="load_div">
+        Loading...
+        <div class="progress progress-striped active" style="width:180px;margin:auto;">
+          <div id="load_bar" class="bar" style="width:0%;"></div>
+        </div>
+        <span id="load_pct"></span>%
+      </div>
+      <div id="tooltip">
+        <div id="tooltip_header"></div>
+        <ul id="tooltip_contents"></ul>
+      </div>
+
+      <div id="shortcuts" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <!--  shortcuts.html  -->
+          </div>
+        </div>
+      </div>
+
+      <div id="debug_flags" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Debug Flags</h4>
+            </div>
+            <div class="modal-body">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" id="debugmode" onclick="DEBUGGING = this.checked;" /> Debug mode
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" id="freeze" onclick="FREEZE_MONSTERS = this.checked;" /> Freeze monster movement
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" id="mspells" onclick="MONSTER_SPELLS = this.checked;" /> Monsters can cast spells
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" id="detect" onclick="DETECT_MONSTERS = this.checked;" /> Detect monsters
+                </label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="inventory" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <!-- inventory.html -->
+          </div>
+        </div>
+      </div>
+
+      <div id="minimap_popup" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" style="width:600px;">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Map</h4>
+            </div>
+            <div class="modal-body" style="padding:0px">
+              <canvas id="minimap" width="600" height="600" oncontextmenu="return false;"></canvas>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="storage" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" style="width:625px;">
+          <div class="modal-content">
+            <!--  storage.html  -->
+          </div>
+        </div>
+      </div>
+
+      <div id="customize_spells" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" style="width:550px;">
+          <div class="modal-content">
+            <!--  spellbook.html  -->
+          </div>
+        </div>
+      </div>
+
+      <div id="new_game" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <!--  new_game.html  -->
+          </div>
+        </div>
+      </div>
+
+      <div id="char_info" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" style="width:650px;">
+          <div class="modal-content">
+            <!--  character_info.html  -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+          $(".btn-group").button();
+
+          $("#shortcuts").modal({
+            show: false,
+            remote: "html/shortcuts.html"
+          });
+          $("#shortcuts").on("show", open_dialog);
+          $("#shortcuts").on("hide", close_dialog);
+
+          $("#debug_flags").modal({
+            show: false
+          });
+          $("#debug_flags").on("show", open_dialog);
+          $("#debug_flags").on("hide", close_dialog);
+
+          $("#debugmode").prop("checked", DEBUGGING);
+          $("#freeze").prop("checked", FREEZE_MONSTERS);
+          $("#mspells").prop("checked", MONSTER_SPELLS);
+          $("#detect").prop("checked", DETECT_MONSTERS);
+
+          document.game = new Game();
+          document.game.run(1);
+
+          set_command(NO_COMMAND);
+          set_finished();
+        });
+    </script>
+  </body>
+</html>

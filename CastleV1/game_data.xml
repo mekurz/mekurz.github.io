@@ -1,0 +1,450 @@
+<Game>
+  <Tiles>
+    <Tile id="0" src="grass.png"/>
+    <Tile id="1" src="dirt.png"/>
+    <Tile id="2" src="stones.png"/>
+    <Tile id="3" src="wall.png"/>
+    <Tile id="4" src="stones2.png"/>
+    <Tile id="5" src="stones2.png"/>
+    <Tile id="6" src="closed_door.png"/>
+    <Tile id="7" src="open_door.png"/>
+    <Tile id="8" src="broken_door.png"/>
+    <Tile id="9" src="stones3.png"/>
+    <Tile id="10" src="wall2.png"/>
+    <Tile id="11" src="wall3.png"/>
+    <Tile id="12" src="wall4.png"/>
+    <Tile id="13" src="wall5.png"/>
+    <Tile id="14" src="wall6.png"/>
+    <Tile id="15" src="wall7.png"/>
+    <Tile id="16" src="stones4.png"/>
+    <Tile id="17" src="stairs_up.png"/>
+    <Tile id="18" src="stairs_down.png"/>
+    <Tile id="19" src="trap_spear.png"/>
+    <Tile id="20" src="trap_rune.png"/>
+    <Tile id="21" src="flame1.png"/>
+    <Tile id="22" src="flame2.png"/>
+    <Tile id="23" src="flame3.png"/>
+    <Tile id="24" src="flame4.png"/>
+    <Tile id="25" src="altar1.png"/>
+    <Tile id="26" src="altar2.png"/>
+    <Tile id="27" src="altar3.png"/>
+    <Tile id="28" src="altar4.png"/>
+  </Tiles>
+  <Textures>
+    <Texture id="1">
+      <Floor value="2,2,2,2,2,4,4,4,4,4,9,9,9,16,16"/>
+      <Walls value="3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,10,11,12,13,14,15"/>
+      <Widgets value="3,4,5,6"/>
+    </Texture>
+  </Textures>
+  <Widgets>
+    <Widget id="0" tile_id="17">
+      <Description>Stairs up</Description>
+      <Passable>1</Passable>
+      <LightSource>0</LightSource>
+    </Widget>
+    <Widget id="1" tile_id="18">
+      <Description>Stairs down</Description>
+      <Passable>1</Passable>
+      <LightSource>0</LightSource>
+    </Widget>
+    <Widget id="2" tile_id="21,22,23,24">
+      <Description>a blazing firepit</Description>
+      <Passable>0</Passable>
+      <LightSource>1</LightSource>
+      <Speed>2</Speed>
+    </Widget>
+    <Widget id="3" tile_id="25">
+      <Description>an empty altar</Description>
+      <Passable>0</Passable>
+      <LightSource>0</LightSource>
+    </Widget>
+    <Widget id="4" tile_id="26">
+      <Description>a creepy altar</Description>
+      <Passable>0</Passable>
+      <LightSource>0</LightSource>
+    </Widget>
+    <Widget id="5" tile_id="27">
+      <Description>an ugly altar</Description>
+      <Passable>0</Passable>
+      <LightSource>0</LightSource>
+    </Widget>
+    <Widget id="6" tile_id="28">
+      <Description>a pile of skulls</Description>
+      <Passable>0</Passable>
+      <LightSource>0</LightSource>
+    </Widget>
+  </Widgets>
+  <Traps>
+    <Trap id="1" tile_id="19">
+      <Description>Spear Trap</Description>
+      <Damage>10</Damage>
+      <Reset>0</Reset>
+    </Trap>
+    <Trap id="2" tile_id="20">
+      <Description>Rune Trap</Description>
+      <Damage>3</Damage>
+      <Reset>1</Reset>
+    </Trap>
+  </Traps>
+  <Spells>
+    <Images>
+      <Small>
+        <SpellImage id="0" src="splat.png"/>
+        <SpellImage id="1" src="fizzle.png"/>
+        <SpellImage id="2" src="missile.png"/>
+        <SpellImage id="3" src="lightning.png"/>
+        <SpellImage id="4" src="firebolt.png"/>
+        <SpellImage id="5" src="boulder.png"/>
+        <SpellImage id="6" src="light.png"/>
+        <SpellImage id="7" src="fireball_mini.png"/>
+        <SpellImage id="8" src="lightning_ball_mini.png"/>
+        <SpellImage id="9" src="coldbolt.png"/>
+        <SpellImage id="10" src="coldball_mini.png"/>
+        <SpellImage id="11" src="shield.png"/>
+        <SpellImage id="12" src="dimension_door.png"/>
+        <SpellImage id="13" src="portal.png"/>
+        <SpellImage id="14" src="poison.png"/>
+        <SpellImage id="15" src="big_muscles.png"/>
+        <SpellImage id="16" src="weakness.png"/>
+      </Small>
+      <Big>
+        <SpellImage id="0" src="fireball.png"/>
+        <SpellImage id="1" src="cone_fire.png"/>
+        <SpellImage id="2" src="cone_fire_d.png"/>
+        <SpellImage id="3" src="lightning_ball.png"/>
+        <SpellImage id="4" src="coldball.png"/>
+      </Big>
+    </Images>
+    <Projectile>
+	    <Spell id="p1" projectile_id="2" toolbar_id="2" level="1">
+	      <Description>Magic Missile</Description>
+	      <Mana>1</Mana>
+	      <Damage>2</Damage>
+	      <Verb>slams into</Verb>
+	    </Spell>
+	    <Spell id="p2" projectile_id="3" toolbar_id="3" level="1">
+	      <Description>Lightning Bolt</Description>
+	      <Mana>2</Mana>
+	      <Damage>3</Damage>
+	      <Verb>fries</Verb>
+	    </Spell>
+	    <Spell id="p3" projectile_id="4" toolbar_id="4" level="1">
+	      <Description>Firebolt</Description>
+	      <Mana>4</Mana>
+	      <Damage>7</Damage>
+	      <Verb>scorches</Verb>
+	    </Spell>
+	    <Spell id="p4" projectile_id="5" toolbar_id="5" level="999">
+				<Description>Boulder</Description>
+				<Mana>0</Mana>
+				<Damage>4</Damage>
+				<Verb>crashes into</Verb>
+				<Action>hurls</Action>
+	    </Spell>
+	    <Spell id="p5" projectile_id="9" toolbar_id="9" level="1">
+        <Description>Cold Bolt</Description>
+        <Mana>4</Mana>
+        <Damage>7</Damage>
+        <Verb>freezes</Verb>
+      </Spell>
+    </Projectile>
+    <Utility>
+      <Spell id="u1" projectile_id="6" toolbar_id="6" level="1">
+        <Description>Light</Description>
+        <Mana>2</Mana>
+        <Damage>0</Damage>
+        <Verb></Verb>
+        <Action></Action>
+      </Spell>
+      <Spell id="u2" effect_id="13" toolbar_id="12" self_target="1" level="1">
+        <Description>Dimension Door</Description>
+        <Mana>0</Mana>
+        <Damage>0</Damage>
+        <Verb></Verb>
+        <Action></Action>
+      </Spell>
+    </Utility>
+    <StatusSpells>
+      <Spell id="e1" effect_id="14" level="999">
+        <Description>Monster Poison</Description>
+        <Mana>0</Mana>
+        <StatusEffect>1</StatusEffect>
+      </Spell>
+      <Spell id="e2" effect_id="13" toolbar_id="11" self_target="1" level="1">
+        <Description>Shield</Description>
+        <Mana>0</Mana>
+        <StatusEffect>3</StatusEffect>
+      </Spell>
+      <Spell id="e3" effect_id="13" toolbar_id="15" self_target="1" level="1">
+        <Description>Big Muscles</Description>
+        <Mana>1</Mana>
+        <StatusEffect>4</StatusEffect>
+      </Spell>
+      <Spell id="e4" effect_id="13" toolbar_id="16" self_target="1" level="1">
+        <Description>Weakness</Description>
+        <Mana>1</Mana>
+        <StatusEffect>5</StatusEffect>
+      </Spell>
+    </StatusSpells>
+    <AreaEffect>
+	    <Spell id="a1" projectile_id="4" area_id="0" toolbar_id="7" level="1">
+	      <Description>Fireball</Description>
+	      <Mana>4</Mana>
+	      <Damage>10</Damage>
+	      <Splash>5</Splash>
+	      <Verb>engulfs</Verb>
+	    </Spell>
+	    <Spell id="a2" projectile_id="3" area_id="3" toolbar_id="8" level="1">
+        <Description>Lightning Ball</Description>
+        <Mana>4</Mana>
+        <Damage>10</Damage>
+        <Splash>5</Splash>
+        <Verb>fries</Verb>
+      </Spell>
+      <Spell id="a3" projectile_id="9" area_id="4" toolbar_id="10" level="1">
+        <Description>Cold Ball</Description>
+        <Mana>4</Mana>
+        <Damage>10</Damage>
+        <Splash>5</Splash>
+        <Verb>freezes</Verb>
+      </Spell>
+    </AreaEffect>
+    <ConeEffect>
+	    <Spell id="c1" cardinal_id="1" diagonal_id="2" level="1">
+	      <Description>Fire Breath</Description>
+	      <Mana>0</Mana>
+	      <Damage>10</Damage>
+	      <Verb>blasts</Verb>
+	    </Spell>
+    </ConeEffect>
+  </Spells>
+  <Monsters>
+    <Monster id="0" src="ratman.png">
+      <Description>Rat Man</Description>
+      <HP>7</HP>
+      <Mana>0</Mana>
+      <AC>10</AC>
+      <Sight>3</Sight>
+      <Melee>1</Melee>
+      <Quality>
+        <Rare min_level="1" max_level="1"/>
+        <Uncommon min_level="2" max_level="2"/>
+        <Common min_level="3" max_level="3"/>
+      </Quality>
+    </Monster>
+    <Monster id="1" src="hillgiant.png">
+      <Description>Hill Giant</Description>
+      <HP>30</HP>
+      <Mana>0</Mana>
+      <AC>10</AC>
+      <Sight>6</Sight>
+      <Melee>4</Melee>
+      <SpellCast id="p4"/>
+      <Quality>
+        <Rare min_level="3" max_level="3"/>
+        <Uncommon min_level="4" max_level="5"/>
+        <Common min_level="6"/>
+      </Quality>
+    </Monster>
+    <Monster id="2" src="slime.png">
+      <Description>Disgusting Slime</Description>
+      <HP>10</HP>
+      <Mana>0</Mana>
+      <AC>10</AC>
+      <Sight>1</Sight>
+      <Melee>2</Melee>
+      <Behave>2</Behave>
+      <SpellCast id="e1"/>
+      <Quality>
+        <Rare min_level="1" max_level="3"/>
+        <Uncommon min_level="4"/>
+      </Quality>
+    </Monster>
+    <Monster id="3" src="giant_rat.png">
+      <Description>Giant Rat</Description>
+      <HP>3</HP>
+      <Mana>0</Mana>
+      <AC>5</AC>
+      <Sight>3</Sight>
+      <Melee>1</Melee>
+      <Quality>
+        <Common min_level="1" max_level="3"/>
+      </Quality>
+    </Monster>
+    <Monster id="4" src="giant_snake.png">
+      <Description>Giant Snake</Description>
+      <HP>6</HP>
+      <Mana>0</Mana>
+      <AC>8</AC>
+      <Sight>3</Sight>
+      <Melee>2</Melee>
+      <Quality>
+        <Common min_level="2" max_level="5"/>
+      </Quality>
+    </Monster>
+    <Monster id="5" src="giant_bat.png">
+      <Description>Giant Bat</Description>
+      <HP>3</HP>
+      <Mana>0</Mana>
+      <AC>15</AC>
+      <Sight>10</Sight>
+      <Melee>2</Melee>
+      <Behave>0</Behave>
+      <Quality>
+        <Uncommon min_level="1" max_level="1"/>
+        <Common min_level="2" max_level="5"/>
+      </Quality>
+    </Monster>
+    <Monster id="6" src="skeleton.png">
+      <Description>Skeleton</Description>
+      <HP>10</HP>
+      <Mana>0</Mana>
+      <AC>10</AC>
+      <Sight>3</Sight>
+      <Melee>3</Melee>
+      <Quality>
+        <Common min_level="2" max_level="4"/>
+        <Uncommon min_level="5"/>
+      </Quality>
+    </Monster>
+    <Monster id="7" src="red_dragon.png">
+      <Description>Red Dragon</Description>
+      <HP>50</HP>
+      <Mana>0</Mana>
+      <AC>10</AC>
+      <Sight>3</Sight>
+      <Melee>5</Melee>
+      <SpellCast id="c1"/>
+      <Quality>
+        <Common min_level="5"/>
+        <Uncommon min_level="4"/>
+      </Quality>
+    </Monster>
+  </Monsters>
+  <StatusEffects>
+    <StatusEffect id="1" type="0">
+      <Description>Weak Poison</Description>
+      <Damage>1</Damage>
+      <Rounds>6</Rounds>
+    </StatusEffect>
+    <StatusEffect id="2" type="0">
+      <Description>Minor Poison</Description>
+      <Damage>2</Damage>
+      <Rounds>6</Rounds>
+    </StatusEffect>
+    <StatusEffect id="3" type="1">
+      <Description>Shield</Description>
+      <Rounds>10</Rounds>
+      <Effect>
+        <ac>3</ac>
+      </Effect>
+    </StatusEffect>
+    <StatusEffect id="4" type="1">
+      <Description>Big Muscles!</Description>
+      <Rounds>10</Rounds>
+      <Effect>
+        <str>4</str>
+      </Effect>
+    </StatusEffect>
+    <StatusEffect id="5" type="2">
+      <Description>Weakness</Description>
+      <Rounds>10</Rounds>
+      <Effect>
+        <str>-4</str>
+      </Effect>
+    </StatusEffect>
+  </StatusEffects>
+  <Paperdoll>
+    <DollImage id="0" src="base.png"/>
+    <DollImage id="1" src="back1.png"/>
+    <DollImage id="2" src="feet1.png"/>
+    <DollImage id="3" src="head1.png"/>
+    <DollImage id="4" src="hands1.png"/>
+    <DollImage id="5" src="weapon1.png"/>
+    <DollImage id="6" src="weapon2.png"/>
+    <DollImage id="7" src="shield1.png"/>
+    <DollImage id="8" src="shield2.png"/>
+    <DollImage id="9" src="chest1.png"/>
+    <DollImage id="10" src="legs1.png"/>
+  </Paperdoll>
+  <Items>
+    <Images>
+      <ItemImage id="0" src="amulet1.png"/>
+      <ItemImage id="1" src="amulet2.png"/>
+      <ItemImage id="2" src="armour1.png"/>
+      <ItemImage id="3" src="belt1.png"/>
+      <ItemImage id="4" src="boots1.png"/>
+      <ItemImage id="5" src="boots2.png"/>
+      <ItemImage id="6" src="boots3.png"/>
+      <ItemImage id="7" src="bracers1.png"/>
+      <ItemImage id="8" src="buckler1.png"/>
+      <ItemImage id="9" src="cloak1.png"/>
+      <ItemImage id="10" src="dagger1.png"/>
+      <ItemImage id="11" src="gloves1.png"/>
+      <ItemImage id="12" src="helmet1.png"/>
+      <ItemImage id="13" src="long_sword1.png"/>
+      <ItemImage id="14" src="ring1.png"/>
+      <ItemImage id="15" src="ring2.png"/>
+      <ItemImage id="16" src="shield1.png"/>
+      <ItemImage id="17" src="multiple.png"/>
+    </Images>
+    <Back>
+      <Item id="back1" img_id="9" doll_id="1">
+        <Description>Pimp Cloak</Description>
+      </Item>
+    </Back>
+    <Chest>
+      <Item id="chest1" img_id="2" doll_id="9" legs_id="10">
+        <Description>Leather Armour</Description>
+      </Item>
+    </Chest>
+    <Feet>
+      <Item id="feet1" img_id="5" doll_id="2">
+        <Description>Giant Green Boots</Description>
+      </Item>
+    </Feet>
+    <Hands>
+      <Item id="hands1" img_id="11" doll_id="4">
+        <Description>Oven Mitt of Doom</Description>
+      </Item>
+    </Hands>
+    <Hat>
+      <Item id="head1" img_id="12" doll_id="3">
+        <Description>Wicked Helmet</Description>
+      </Item>
+    </Hat>
+    <Neck>
+      <Item id="neck1" img_id="0">
+        <Description>Amulet of Protection</Description>
+      </Item>
+      <Item id="neck2" img_id="1">
+        <Description>Amulet of Health</Description>
+      </Item>
+    </Neck>
+    <Ring>
+      <Item id="ring1" img_id="15">
+        <Description>Ruby Ring</Description>
+      </Item>
+      <Item id="ring2" img_id="14">
+        <Description>Emerald Ring</Description>
+      </Item>
+    </Ring>
+    <Shield>
+      <Item id="shield1" img_id="8" doll_id="7">
+        <Description>Wooden Buckler</Description>
+      </Item>
+      <Item id="shield2" img_id="16" doll_id="8">
+        <Description>Large Steel Shield</Description>
+      </Item>
+    </Shield>
+    <Weapon>
+      <Item id="weapon1" img_id="10" doll_id="5">
+        <Description>Puny Dagger</Description>
+      </Item>
+      <Item id="weapon2" img_id="13" doll_id="6">
+        <Description>Big Sword of Smashing</Description>
+      </Item>
+    </Weapon>
+  </Items>
+</Game>

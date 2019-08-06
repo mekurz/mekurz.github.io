@@ -1,0 +1,360 @@
+@CHARSET "ISO-8859-1";
+
+@font-face
+{      
+  font-family: Sherwood;
+  src: url("sherwood.ttf");
+}
+
+#game_buttons
+{
+  margin-bottom:3px;
+}
+
+#game_buttons .btn
+{
+	height: 42px;
+}
+
+.btn-delete
+{
+  width: 22px;
+  height: 22px;
+  padding: 0px;
+}
+
+#tooltip 
+{
+  border: 1px solid black;
+  background: white;
+  position: absolute;
+  z-index: 9999;
+  font-size: 7pt;
+  padding: 5px;
+}
+
+#tooltip ul
+{
+  list-style-type:none;
+	padding:0px;
+	margin:0px;
+}
+
+#tooltip li
+{
+	background-image:url("../images/dash.gif");
+	background-repeat:no-repeat;
+	background-position:0px 3px; 
+	padding-left:10px;
+	line-height: normal;
+}
+
+.Information
+{
+  overflow: hidden;
+  border: 1px solid black;
+  border-top-width: 0px;
+  font-family: monospace;
+  font-size: 8pt;
+  position:absolute;
+  top: 482px;
+  height: 150px;
+}
+
+#effects
+{
+  overflow-y: auto;
+  height: 85px;
+}
+
+#effects .label
+{
+  font-weight: normal;
+  font-size: 100%;
+  display: block;
+}
+
+.StatName
+{
+	float:left;
+	clear:left;
+}
+
+.Stat
+{
+	float:right;	
+}
+
+.NonEquipped 
+{
+	border: 1px solid black;
+	overflow: auto;
+}
+
+.Item
+{ 
+	width: 75px;
+	height: 75px;
+	border: 1px solid blue;
+	float: left;
+	background: white;
+	text-align: center;
+	overflow-y: hidden;
+	margin: 1px;
+	padding-left: 4px;
+	padding-right: 4px;
+	cursor: move;
+}
+
+.Item h1 
+{
+	font-family: verdana;
+	font-size: 7pt;
+	font-weight: normal;
+	line-height: normal;
+  margin: 0px;
+}
+
+.BlankItemSlot 
+{
+	display: none;
+}
+
+.ItemSlot
+{
+	width: 81px;
+	height: 81px;
+	border: 1px solid black;
+	background: white;
+	margin: 0px;
+	position: absolute;
+}
+
+.Row0 { top:0px; }
+.Row1 { top:80px; }
+.Row2 { top:160px; }
+.Row3 { top:240px; }
+.Row4 { top:320px; }
+.Row5 { top:400px; }
+
+.Col0 { left:0px; }
+.Col1 { left:80px; }
+.Col2 { left:160px; }
+.Col3 { left:240px; }
+.Col4 { left:320px; }
+
+#stored_games
+{
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+#stored_games li
+{
+  margin: 3px;
+  padding: 3px;
+}
+
+#stored_games .ui-selecting
+{
+	background: #FECA40;
+}
+
+#stored_games .ui-selected
+{
+	background: #F39814;
+	color: white;
+}
+
+.Avatar
+{
+  width: 32px;
+  height: 32px;
+  vertical-align:top;	
+}
+
+.StoredGameTitle
+{
+	font-weight:bold;
+}
+
+.StoredGameInfo span
+{
+  font-size: 10pt;	
+}
+
+#load_div
+{
+	width: 200px;
+	background: white;
+	border: 1px solid black;
+	text-align: center;
+	line-height: 30px;
+	position: absolute;
+	top: 200px;
+	left: 380px;
+}
+
+.ui-combobox
+{
+  position: relative;
+  display: inline-block;
+}
+
+.ui-combobox-toggle
+{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin-left: -1px;
+  margin-top: 1px;
+  padding: 0;
+  width:25px;
+  line-height:30px;
+}
+
+.ui-combobox-input
+{
+  margin: 0;
+  padding: 0.3em;
+}
+
+.ui-autocomplete
+{
+  max-height: 200px;
+  overflow-y: auto;
+  /* prevent horizontal scrollbar */
+  overflow-x: hidden;
+  /* add padding to account for vertical scrollbar */
+  padding-right: 20px;
+}
+
+.Rounded
+{
+	background-color: #cccccc;
+	-webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+}
+
+.v-progress {
+  overflow: hidden;
+  width: 36px;
+  margin: auto;
+  background-color: #f7f7f7;
+  background-image: -moz-linear-gradient(top, #f5f5f5, #f9f9f9);
+  background-image: -ms-linear-gradient(top, #f5f5f5, #f9f9f9);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f5f5f5), to(#f9f9f9));
+  background-image: -webkit-linear-gradient(top, #f5f5f5, #f9f9f9);
+  background-image: -o-linear-gradient(top, #f5f5f5, #f9f9f9);
+  background-image: linear-gradient(top, #f5f5f5, #f9f9f9);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f5f5f5', endColorstr='#f9f9f9', GradientType=0);
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  position:relative;
+}
+
+.tall
+{
+	height: 200px;
+}
+	
+.short
+{
+	height: 100px;
+}
+
+.v-progress .bar,.narrow-bar,.narrow-bar2
+{
+  width: 36px;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  position:absolute;
+  bottom:0px;
+}
+
+.v-progress .narrow-bar,.narrow-bar2
+{
+  width: 18px;
+}
+
+.narrow-bar2
+{
+	left: 18px;
+}
+
+#char_info .v-progress
+{
+  margin-top: 5px;	
+}
+
+.blue
+{
+  background-color: #0e90d2;
+  background-image: -moz-linear-gradient(top, #149bdf, #0480be);
+  background-image: -ms-linear-gradient(top, #149bdf, #0480be);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#149bdf), to(#0480be));
+  background-image: -webkit-linear-gradient(top, #149bdf, #0480be);
+  background-image: -o-linear-gradient(top, #149bdf, #0480be);
+  background-image: linear-gradient(top, #149bdf, #0480be);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#149bdf', endColorstr='#0480be', GradientType=0);
+}
+
+.green
+{
+  background-color: #5eb95e;
+  background-image: -moz-linear-gradient(top, #62c462, #57a957);
+  background-image: -ms-linear-gradient(top, #62c462, #57a957);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#62c462), to(#57a957));
+  background-image: -webkit-linear-gradient(top, #62c462, #57a957);
+  background-image: -o-linear-gradient(top, #62c462, #57a957);
+  background-image: linear-gradient(top, #62c462, #57a957);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#62c462', endColorstr='#57a957', GradientType=0);
+}
+
+.minus
+{
+  margin-top: -1px;
+}
+
+.StatBar
+{
+  width: 90px;
+  text-align: center;
+  margin-bottom:10px;
+  float: left;
+}
+
+.StatBarControls
+{
+	margin-top: 5px;
+}
+
+.StatLabel
+{
+	font-size: 10pt;
+  font-weight: bold;
+}
+
+.label
+{
+	margin-right: 2px;
+	margin-bottom: 2px;
+}

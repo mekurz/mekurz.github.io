@@ -1,0 +1,72 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal">&times;</button>
+  <h4 class="modal-title">New Game</h4>
+</div>
+<div class="modal-body">
+  <div id="ng_error" class="alert alert-danger"></div>
+  <form class="form-inline" role="form">
+    <div class="form-group">
+      <label for="ng_name">
+        1. Choose a name
+      </label>
+      <input type="text" id="ng_name" maxlength="30" placeholder="Rock McSlab" class="form-control" style="width:250px"></input>
+    </div>
+    <div class="form-group" style="margin-top:10px;">
+      <label>2. Assign character statistics</label><br/>
+      <div class="StatBar Rounded" style="width:100px;height:170px;margin-top:20px;margin-left:20px;">
+        <span class="StatLabel">Remaining<br />Points</span>
+        <div class="v-progress short" style="margin-top:10px;">
+          <div id="ng_pool" title="Remaining Points" class="bar green"></div>
+        </div>
+      </div>
+      <div class="StatBar">
+        <span class="StatLabel">Strength</span>
+        <div class="StatBarControls">
+          <span class="glyphicon glyphicon-plus plus" stat="str"></span>
+          <div class="v-progress short">
+            <div id="ng_str" title="Strength" class="bar green"></div>
+          </div>
+          <span class="glyphicon glyphicon-minus minus" stat="str"></span>
+        </div>
+      </div>
+      <div class="StatBar">
+        <span class="StatLabel">Intelligence</span>
+        <div class="StatBarControls">
+          <span class="glyphicon glyphicon-plus plus" stat="int"></span>
+          <div class="v-progress short">
+            <div id="ng_int" title="Intelligence" class="bar green"></div>
+          </div>
+          <span class="glyphicon glyphicon-minus minus" stat="int"></span>
+        </div>
+      </div>
+      <div class="StatBar">
+        <span class="StatLabel">Dexterity</span><br />
+        <div class="StatBarControls">
+          <span class="glyphicon glyphicon-plus plus" stat="dex"></span>
+          <div class="v-progress short">
+            <div id="ng_dex" title="Dexterity" class="bar green"></div>
+          </div>
+          <span class="glyphicon glyphicon-minus minus" stat="dex"></span>
+        </div>
+      </div>
+      <div class="StatBar">
+        <span class="StatLabel">Constitution</span><br />
+        <div class="StatBarControls">
+          <span class="glyphicon glyphicon-plus plus" stat="con"></span>
+          <div class="v-progress short">
+            <div id="ng_con" title="Constitution" class="bar green"></div>
+          </div>
+          <span class="glyphicon glyphicon-minus minus" stat="con"></span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group" style="width:100%;">
+      <label for="ng_spells">3. Choose three spells to learn</label><br />
+      <select id="ng_spells" class="chosen-select" data-placeholder="Click to choose spells..." multiple="multiple" style="width:100%;"></select>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn" data-dismiss="modal">Cancel</button>
+  <button id="storage_ok" class="btn btn-primary" onclick="NewGame.ok();">Start Game</button>
+</div>
