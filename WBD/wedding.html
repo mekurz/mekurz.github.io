@@ -1,0 +1,105 @@
+<!DOCTYPE html> 
+<html>
+  <head>
+    <title>Willy's Big Day</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="title" content="Willy's Big Day" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="libs/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      var STAGE_START    = 0;
+      
+      var NUM_STAGES     = 14;
+      var current_stage = STAGE_START;
+      
+      var IMAGES = new Array();
+      
+      for( var ix = 1; ix <= NUM_STAGES; ++ ix )
+      {
+        var img = new Image();
+        img.src = ""; // Workaround for Chrome
+        img.src = "images/wedding" + ix + ".png";
+        IMAGES.push( img );
+      }
+    
+      function update_visibility()
+      {
+        switch( current_stage )
+        {
+          case STAGE_START:
+            $("#caption").html("The Bros of Righteous Partying were stunned. No one had EVER refused.");
+            break;
+          case 1:
+            $("#caption").html("All of their hooting and hollering was answered only by soft Willy snores.");
+            break;
+          case 2:
+            $("#caption").html("\"We have no choice but to play the most bodacious prank,\" they said.");
+            break;
+          case 3:
+            $("#caption").html("Their work complete, the Bros disappeared as quickly as they came...");
+            break;
+          case 4:
+            $("#caption").html("The night slowly passed with nary a tit having been seen.");
+            break;
+          case 5:
+            $("#caption").html("Willy woke up early and soon realized that something was very WRONG.");
+            break;
+          case 6:
+            $("#caption").html("With growing fear, Willy looked under his covers and gasped with HORROR!");
+            break;
+          case 7:
+            $("#caption").html("<i>WILLY WAS WEARING A GIANT DIAPER!</i>");
+            break;
+          case 8:
+            $("#caption").html("Willy pulled and tugged and stretched but it was no use! The diaper was STUCK.");
+            break;
+          case 9:
+            $("#caption").html("\"What a disaster,\" thought Willy. His velvet wedding jerkin would no longer fit!");
+            break;
+          case 10:
+            $("#caption").html("Suddenly, Willy had an AMAZING idea.");
+            break;
+          case 11:
+            $("#caption").html("\"If the jerkin won't fit,\" he said, \"then I will just have to find something that will!\"");
+            break;
+          case 12:
+            $("#caption").html("And so it came to be that Willy got married in his old pumpkin costume.");
+            break;
+          case 13:
+            $("#caption").html("");
+            $("#line").hide();
+            $("#next").hide();
+            break;
+        }
+
+        if( current_stage < 14 )
+        {
+          $("#picture").attr("src", IMAGES[current_stage].src );
+          current_stage++;
+        }
+      }
+    </script>
+  </head>
+  <body style="background-color:#DDDDDD">
+    <div class="layout" style="width:800px">
+      <h3>Willy's Big Day</h3>
+      <div style="width:500px;height:300px;margin:0 auto;">
+        <img id="picture"/>
+      </div>
+      <p id="caption" class="lead text-center"></p>
+      <hr id="line"/>
+      <div class="text-right">
+        <button id="next" class="btn btn-primary" type="button" onclick="update_visibility();">NEXT &gt;</button>
+      </div>
+    </div>    
+    <script type="text/javascript">
+      $(document).ready( function()
+      {
+        current_stage = STAGE_START;
+        update_visibility();
+      });
+    </script>
+  </body>
+</html>

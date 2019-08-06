@@ -1,0 +1,255 @@
+<!DOCTYPE html> 
+<html>
+  <head>
+    <title>Willy's Big Day</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="title" content="Willy's Big Day" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="libs/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      var STAGE_START    = 0;
+      var STAGE_HAS_BEER = 1;
+      var STAGE_HAS_SHOT = 2;
+      var STAGE_DONE     = 3;
+      var STAGE_BATHROOM = 4;
+      var STAGE_SMELL    = 5;
+      var STAGE_FINAL    = 6;
+      
+      var IMAGES = new Array();
+      
+      for( var ix = 1; ix <= 10; ++ ix )
+      {
+        var img = new Image();
+        img.src = ""; // Workaround for Chrome
+        img.src = "images/bar" + ix + ".png";
+        IMAGES.push( img );
+      }
+    
+      var current_stage = STAGE_START;
+      var num_shots = 0;
+      var my_shots = 0;
+      var cash = 25;
+      
+      function buy_shot()
+      {
+        $("#shots").append("<img src=\"images/shotglass.png\"/>");
+        
+        current_stage = STAGE_HAS_SHOT;
+        cash -= 5;
+        num_shots++;
+        
+        if( cash == 10 )
+        {
+          $("#caption").html("Uh oh! Willy had to pee. What do you do?");
+          $("#picture").attr("src", IMAGES[3].src );
+          current_stage = STAGE_BATHROOM;
+        }
+        else
+        {
+          $("#caption").html("\"No, I told you I'm not drinking that!\""); 
+          $("#picture").attr("src", IMAGES[2].src );
+        }
+        
+        update_visibility();
+      }
+      
+      function remove_shot()
+      {
+        $("#caption").html("Willy conspicuously ignores you.");
+        $("#picture").attr("src", IMAGES[5].src );
+        $("#shots img:first-child").remove();
+        
+        if( num_shots > 0 )
+        {
+          num_shots--;
+          my_shots++;
+        
+          
+          if( num_shots == 0 && cash == 0 )
+          {
+            current_stage = STAGE_DONE;
+          }
+          else if( num_shots == 0 )
+          {
+            current_stage = STAGE_HAS_BEER;
+          }
+        }
+        
+        update_visibility();
+      }
+      
+      function buy_beer()
+      {
+        $("#caption").html("\"Thanks! I'll let that warm up for a bit.\"");
+        $("#picture").attr("src", IMAGES[1].src );
+        current_stage = STAGE_HAS_BEER;
+        cash -= 5;
+        update_visibility();
+      }
+      
+      function bitch_chant()
+      {
+        $("#caption").html("\"I wonder who they're saying that to.\"");
+        $("#picture").attr("src", IMAGES[4].src );
+      }
+      
+      function strippers()
+      {
+        $("#caption").html("\"Let's keep that idea on the table, but like, on the edge of the table.\"");
+        $("#picture").attr("src", IMAGES[6].src );
+      }
+      
+      function pour()
+      {
+        $("#shots img:first-child").remove();
+        num_shots--;
+        $("#caption").html("Willy returns and takes a sip: \"This tastes gross!\"");
+        $("#picture").attr("src", IMAGES[7].src );
+        current_stage = STAGE_SMELL;
+        update_visibility();
+      }
+      
+      function smell()
+      {
+        $("#caption").html("\"Yeah, I guess I smelled that shot you guys put near me.\"");
+        $("#picture").attr("src", IMAGES[8].src );
+        
+        if( num_shots > 0 )
+        {
+          current_stage = STAGE_HAS_SHOT;
+        }
+        else
+        {
+          current_stage = STAGE_HAS_BEER;
+        }
+        update_visibility();
+      }
+      
+      function update_visibility()
+      {
+        $("#cash").html( cash );
+        $("#tally").html( my_shots );
+        
+        switch( current_stage )
+        {
+          case STAGE_START:
+            $("#picture").attr("src", IMAGES[0].src );
+            $("#caption").html("\"Let's get this party started!\"");
+            $("#buy_beer").show();
+            $("#buy_shot").hide();
+            $("#bitch_chant").hide();
+            $("#strippers").hide();
+            $("#drink").hide();
+            $("#pour").hide();
+            $("#smell").hide();
+            $("#done").hide();
+            break;
+          case STAGE_HAS_BEER:
+            $("#buy_beer").hide();
+            $("#buy_shot").show();
+            $("#bitch_chant").hide();
+            $("#strippers").show();
+            $("#drink").hide();
+            $("#pour").hide();
+            $("#smell").hide();
+            $("#done").hide();
+            break;
+          case STAGE_HAS_SHOT:
+            $("#buy_beer").hide();
+            
+            if( cash > 0 )
+            {
+              $("#buy_shot").show();
+            }
+            else
+            {
+              $("#buy_shot").hide();
+            }
+            $("#bitch_chant").show();
+            $("#strippers").show();
+            $("#drink").show();
+            $("#pour").hide();
+            $("#smell").hide();
+            $("#done").hide();
+            break;
+          case STAGE_BATHROOM:
+            $("#buy_beer").hide();
+            $("#buy_shot").hide();
+            $("#bitch_chant").hide();
+            $("#strippers").hide();
+            $("#drink").hide();
+            $("#pour").show();
+            $("#smell").hide();
+            $("#done").hide();
+            break;
+          case STAGE_SMELL:
+            $("#buy_beer").hide();
+            $("#buy_shot").hide();
+            $("#bitch_chant").hide();
+            $("#strippers").hide();
+            $("#drink").hide();
+            $("#pour").hide();
+            $("#smell").show();
+            $("#done").hide();
+            break;
+          case STAGE_DONE:
+            $("#buy_beer").hide();
+            $("#buy_shot").hide();
+            $("#bitch_chant").hide();
+            $("#strippers").hide();
+            $("#drink").hide();
+            $("#pour").hide();
+            $("#smell").hide();
+            $("#done").show();
+            current_stage = STAGE_FINAL;
+            break;
+          case STAGE_FINAL:
+            $("#picture").attr("src", IMAGES[9].src );
+            $("#caption").html("The hour grew even later and Willy went home to sleep.");
+            $("#done").html( "Meanwhile at the BACHELORETTE PARTY..." );
+            $("#done").click( function() { window.location = "stagette.html"; } );
+            break;
+        }
+      }
+    </script>
+  </head>
+  <body style="background-color:#DDDDDD">
+    <div class="layout" style="width:800px">
+      <h3>Willy's Big Day - Interactive PARTY Simulator</h3>
+      <div style="float:left;width:200px;">
+        <strong>Cash: </strong>
+        $<span id="cash">0</span>.00
+      </div>
+      <div style="float:left;margin-left:200px;">
+        <strong>Drink Tally:</strong>
+        Willy - 0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You - <span id="tally">0</span>
+      </div>
+      <div class="clearfix"></div>
+      <div style="width:500px;height:300px;margin:0 auto;">
+        <img id="picture"/>
+      </div>
+      <div id="shots" style="width:500px;height:50px;margin:0 auto;"></div>
+      <p id="caption" class="lead text-center"></p>
+      <hr/>
+      <div class="text-right">
+	      <button id="buy_beer" class="btn btn-primary" type="button" onclick="buy_beer();">Buy Willy a beer!</button>
+	      <button id="buy_shot" class="btn btn-primary" type="button" onclick="buy_shot();">Buy Willy a shot!</button>
+	      <button id="bitch_chant" class="btn btn-primary" type="button" onclick="bitch_chant();">Start a "BITCH!" chant in the bar</button>
+	      <button id="strippers" class="btn btn-primary" type="button" onclick="strippers();">LET'S GO SEE STRIPPERS!</button>
+	      <button id="drink" class="btn btn-primary" type="button" onclick="remove_shot();">Drink the damn shot yourself</button>
+	      <button id="pour" class="btn btn-primary" type="button" onclick="pour();">Pour a shot in Willy's beer</button>
+	      <button id="smell" class="btn btn-primary" type="button" onclick="smell();">Tell Willy it's all in his head</button>
+	      <button id="done" class="btn btn-primary" type="button" onclick="update_visibility();">NEXT &gt;</button>
+	    </div>
+    </div>    
+    <script type="text/javascript">
+      $(document).ready( function()
+      {
+        current_stage = STAGE_START;
+        update_visibility();
+      });
+    </script>
+  </body>
+</html>

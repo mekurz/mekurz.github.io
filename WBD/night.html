@@ -1,0 +1,94 @@
+<!DOCTYPE html> 
+<html>
+  <head>
+    <title>Willy's Big Day</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="title" content="Willy's Big Day" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="libs/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      var STAGE_START    = 0;
+      
+      var NUM_STAGES     = 10;
+      var current_stage = STAGE_START;
+      
+      var IMAGES = new Array();
+      
+      for( var ix = 1; ix <= NUM_STAGES; ++ ix )
+      {
+        var img = new Image();
+        img.src = ""; // Workaround for Chrome
+        img.src = "images/night" + ix + ".png";
+        IMAGES.push( img );
+      }
+    
+      function update_visibility()
+      {
+        switch( current_stage )
+        {
+          case STAGE_START:
+            $("#caption").html("Willy fell asleep hoping that he wouldn't wake up with a hangover.");
+            break;
+          case 1:
+            $("#caption").html("Strange dreams filled Willy's head and an eerie light filled Willy's room!");
+            break;
+          case 2:
+            $("#caption").html("\"Who are you?\" Willy asked the strange figure that appeared.");
+            break;
+          case 3:
+            $("#caption").html("\"Dude, I'm the Bro of Bachelor Parties Present!\" it said.");
+            break;
+          case 4:
+            $("#caption").html("\"My bros and I are here to show you a most EXCELLENT time!\"");
+            break;
+          case 5:
+            $("#caption").html("\"My Bro of Long Ago will show you how dudes <i>used</i> to party...\"");
+            break;
+          case 6:
+            $("#caption").html("\"And my Bro of Tomorrow will show you how dudes <i>will</i> party!\"");
+            break;
+          case 7:
+            $("#caption").html("\"Party on, dude! Let's roll!\"");
+            break;
+          case 8:
+            $("#caption").html("Willy blinked his sleepy eyes and thought for a moment.");
+            break;
+          case 9:
+            $("#caption").html("\"No thanks,\" said Willy. And with that he rolled over and went to sleep.");
+            break;
+          case 10:
+            window.location = "wedding.html";
+            break;
+        }
+
+        if( current_stage < 10 )
+        {
+          $("#picture").attr("src", IMAGES[current_stage].src );
+          current_stage++;
+        }
+      }
+    </script>
+  </head>
+  <body style="background-color:#DDDDDD">
+    <div class="layout" style="width:800px">
+      <h3>Willy's Big Day</h3>
+      <div style="width:500px;height:300px;margin:0 auto;">
+        <img id="picture"/>
+      </div>
+      <p id="caption" class="lead text-center"></p>
+      <hr/>
+      <div class="text-right">
+        <button id="next" class="btn btn-primary" type="button" onclick="update_visibility();">NEXT &gt;</button>
+      </div>
+    </div>    
+    <script type="text/javascript">
+      $(document).ready( function()
+      {
+        current_stage = STAGE_START;
+        update_visibility();
+      });
+    </script>
+  </body>
+</html>

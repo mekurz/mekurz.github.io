@@ -1,0 +1,88 @@
+<!DOCTYPE html> 
+<html>
+  <head>
+    <title>Willy's Big Day</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="title" content="Willy's Big Day" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="libs/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      var STAGE_START    = 0;
+      
+      var NUM_STAGES     = 8;
+      var current_stage = STAGE_START;
+      
+      var IMAGES = new Array();
+      
+      for( var ix = 1; ix <= NUM_STAGES; ++ ix )
+      {
+        var img = new Image();
+        img.src = ""; // Workaround for Chrome
+        img.src = "images/index" + ix + ".png";
+        IMAGES.push( img );
+      }
+    
+      function update_visibility()
+      {
+        switch( current_stage )
+        {
+          case STAGE_START:
+            $("#caption").html("by Kurz & Einarson");
+            break;
+          case 1:
+            $("#caption").html("It was a very important day in Willytown.");
+            break;
+          case 2:
+            $("#caption").html("Today was Willy's BIG DAY.");
+            break;
+          case 3:
+            $("#caption").html("Willy was getting married, and today was his BACHELOR PARTY!");
+            break;
+          case 4:
+            $("#caption").html("Willy woke up at 5:00 AM to prepare for staying up all night.");
+            break;
+          case 5:
+            $("#caption").html("Ten uneventful hours passed...");
+            break;
+          case 6:
+            $("#caption").html("And then Willy was off to the races!");
+            break;
+          case 7:
+            $("#caption").html("Unfortunately, gas pedals are hard to press when you have short legs.");
+            break;
+          case 8:
+            window.location = "keg.html";
+            break;
+        }
+
+        if( current_stage < 8 )
+        {
+	        $("#picture").attr("src", IMAGES[current_stage].src );
+	        current_stage++;
+        }
+      }
+    </script>
+  </head>
+  <body style="background-color:#DDDDDD">
+    <div class="layout" style="width:800px">
+      <h3>Willy's Big Day</h3>
+      <div style="width:500px;height:300px;margin:0 auto;">
+        <img id="picture" src="images/index1.png"/>
+      </div>
+      <p id="caption" class="lead text-center"></p>
+      <hr/>
+      <div class="text-right">
+        <button id="done" class="btn btn-primary" type="button" onclick="update_visibility();">NEXT &gt;</button>
+      </div>
+    </div>    
+    <script type="text/javascript">
+      $(document).ready( function()
+      {
+        current_stage = STAGE_START;
+        update_visibility();
+      });
+    </script>
+  </body>
+</html>

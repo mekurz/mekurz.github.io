@@ -1,0 +1,85 @@
+<!DOCTYPE html> 
+<html>
+  <head>
+    <title>Willy's Big Day</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="title" content="Willy's Big Day" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="libs/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      var STAGE_START    = 0;
+      
+      var NUM_STAGES     = 6;
+      var current_stage = STAGE_START;
+      
+      var IMAGES = new Array();
+      
+      for( var ix = 1; ix <= NUM_STAGES; ++ ix )
+      {
+        var img = new Image();
+        img.src = ""; // Workaround for Chrome
+        img.src = "images/keg" + ix + ".png";
+        IMAGES.push( img );
+      }
+    
+      function update_visibility()
+      {
+        switch( current_stage )
+        {
+          case STAGE_START:
+            $("#caption").html("Willy went to MEAT CASTLE, the manliest place in Willytown for STEAK.");
+            break;
+          case 1:
+            $("#caption").html("Willy ordered the 72-oz Brontosaurus steak with all the fixings.");
+            $("#next").html("Order Willy a primer drink!");
+            break;
+          case 2:
+            $("#caption").html("\"WTF, I've been awake since 5:00 AM. I can't drink a lot today!\"");
+            $("#next").html("Uhhh...");
+            break;
+          case 3:
+            $("#caption").html("Soon, Willy's STEAK arrives and he gets ready to dig in!");
+            $("#next").html("NEXT &gt;");
+            break;
+          case 4:
+            $("#caption").html("<i>*scrape*</i>");
+            break;
+          case 5:
+            $("#caption").html("The hour grew late and it was time to head to a drinking establishment.");
+            break;
+          case 6:
+            window.location = "bar.html";
+            break;
+        }
+
+        if( current_stage < 6 )
+        {
+	        $("#picture").attr("src", IMAGES[current_stage].src );
+	        current_stage++;
+        }
+      }
+    </script>
+  </head>
+  <body style="background-color:#DDDDDD">
+    <div class="layout" style="width:800px">
+      <h3>Willy's Big Day - Meat Castle</h3>
+      <div style="width:500px;height:300px;margin:0 auto;">
+        <img id="picture"/>
+      </div>
+      <p id="caption" class="lead text-center"></p>
+      <hr/>
+      <div class="text-right">
+        <button id="next" class="btn btn-primary" type="button" onclick="update_visibility();">NEXT &gt;</button>
+      </div>
+    </div>    
+    <script type="text/javascript">
+      $(document).ready( function()
+      {
+        current_stage = STAGE_START;
+        update_visibility();
+      });
+    </script>
+  </body>
+</html>
